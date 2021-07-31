@@ -205,11 +205,80 @@ const ticketMedio = ((lista) => {
 ticketMedio(listaProdutos)
 
 // 11. Somatória de itens por departamento (você deverá retornar um objeto contendo o nome do departamento e o total de itens nele - Novamente considere os produtos “EM ESTOQUE” - e é apenas a somatória da quantidade de itens)
+const itensPorDepartamento = ((lista) => {
+    let departamentos = {}
+    lista.map(produto => {
+        let dpto = produto.departamento.nomeDepto
+        if (!Object.keys(departamentos).includes(dpto)){
+            departamentos = {... departamentos, [dpto]:produto.qtdEstoque}
+        } else {
+            departamentos[dpto] += produto.qtdEstoque
+        }
+    })
+    console.log("11. Somatória de itens por departamento: " + JSON.stringify(departamentos))
+    return departamentos;
+})
+itensPorDepartamento(listaProdutos)
 
 // 12. Valor total do inventário por departamento (similar ao item anterior - considere TODOS os produtos)
+const inventarioPorDepartamento = ((lista) => {
+    let departamentos = {}
+    lista.map(produto => {
+        let dpto = produto.departamento.nomeDepto
+        if (!Object.keys(departamentos).includes(dpto)){
+            departamentos = {... departamentos, [dpto]:(produto.preco * produto.qtdEstoque)}
+        } else {
+            departamentos[dpto] += (produto.preco * produto.qtdEstoque)
+        }
+    })
+    console.log("12. Valor total do inventário por departamento: " + JSON.stringify(departamentos))
+    return departamentos;
+})
+let invPorDepartamento = inventarioPorDepartamento(listaProdutos)
 
-// 13. Ticket médio por departamento (similar ao item anterior, porém retornando uma lista de objetos que contenha o nome do departamento e o seu ticket médio). Este é um exercícios difícil, porém é 
+// 13. Ticket médio por departamento (similar ao item anterior, porém retornando uma lista de objetos que contenha o nome do departamento e o seu ticket médio)
+const ticketMedioPorDepartamento = ((lista) => {
+    let departamentos = {}
+    Object.keys(invPorDepartamento).map((dpto) => {
+        let quant = 0
+        lista.map(produto => {
+            if (produto.departamento.nomeDepto === dpto){
+                quant ++
+            }
+        })
+        departamentos = {... departamentos, [dpto]: (invPorDepartamento[dpto]/quant)}
+    })
+    console.log("13. Ticket médio por departamento: " + JSON.stringify(departamentos))
+    return departamentos
+})
+ticketMedioPorDepartamento(listaProdutos)
 
 // 14. Departamento mais valioso (qual o departamento que tem a maior somatória dos valores dos itens - Considere todos os departamentos)
+const departamentoMaisValioso = ((lista) => {
+    let departamento = null
+    let maxValor = Number.NEGATIVE_INFINITY
+    Object.keys(invPorDepartamento).map((dpto) => {
+        if (invPorDepartamento[dpto] > maxValor){
+            maxValor = invPorDepartamento[dpto]
+            departamento = dpto
+        }
+    })
+    console.log(`14. Departamento mais valioso: ${departamento}`)
+    return departamento
+})
+departamentoMaisValioso(listaProdutos)
 
 // 15. Departamento menos valioso (similar ao anterior)
+const departamentoMenosValioso = ((lista) => {
+    let departamento = null
+    let minValor = Number.POSITIVE_INFINITY
+    Object.keys(invPorDepartamento).map((dpto) => {
+        if (invPorDepartamento[dpto] < minValor){
+            minValor = invPorDepartamento[dpto]
+            departamento = dpto
+        }
+    })
+    console.log(`15. Departamento menos valioso: ${departamento}`)
+    return departamento
+})
+departamentoMenosValioso(listaProdutos)
