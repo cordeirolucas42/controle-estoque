@@ -1,16 +1,18 @@
-const prodBase = {
-    "codProduto": 25754,
-    "descricao": "ADAPTADOR BLUETOOH USB RECEPTOR DE AUDIO P2",
-    "preco": 5.0,
-    "qtdEstoque": 10,
-    "disponivel": "sim",
-    "emDestaque": "sim",
-    "departamento": {
-        "idDepto": 1,
-        "nomeDepto": "Adaptadores"
-    }
-}
+// PRODUTO DE EXEMPLO DO DESAFIO
+// const prodBase = {
+//     "codProduto": 25754,
+//     "descricao": "ADAPTADOR BLUETOOH USB RECEPTOR DE AUDIO P2",
+//     "preco": 5.0,
+//     "qtdEstoque": 10,
+//     "disponivel": "sim",
+//     "emDestaque": "sim",
+//     "departamento": {
+//         "idDepto": 1,
+//         "nomeDepto": "Adaptadores"
+//     }
+// }
 
+// LISTA DE PRODUTOS 'MOCK' PARA TESTES, DEPOIS TEM QUE TESTAR COM O ARQUIVO QUE AINDA VÃO ENVIAR
 const listaProdutos = [
     {
         "codProduto": 25754,
