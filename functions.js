@@ -114,6 +114,7 @@ const quantidadeDisponível = ((lista) => {
 quantidadeDisponível(listaProdutos)
 
 // 4. Quantidade de itens disponíveis e em estoque
+// DÚVIDA: Qual a diferença entre o item 4 e 3?
 const quantidadeDisponívelEEmEstoque = ((lista) => {
     let total = 0
     lista.map(produto => {
@@ -207,6 +208,7 @@ const ticketMedio = ((lista) => {
 ticketMedio(listaProdutos)
 
 // 11. Somatória de itens por departamento (você deverá retornar um objeto contendo o nome do departamento e o total de itens nele - Novamente considere os produtos “EM ESTOQUE” - e é apenas a somatória da quantidade de itens)
+// DÚVIDA: De que forma deve ser o output? Uma lista de objetos como [{nomeDpto: Somátoria Itens}, {nomeDpto: Somátoria Itens}, ...}] ? Ou com o 'departamento' no input e a saída apenas com 1 objeto com a somatória de itens daquele departamento?
 const itensPorDepartamento = ((lista) => {
     let departamentos = {}
     lista.map(produto => {
@@ -223,6 +225,7 @@ const itensPorDepartamento = ((lista) => {
 itensPorDepartamento(listaProdutos)
 
 // 12. Valor total do inventário por departamento (similar ao item anterior - considere TODOS os produtos)
+// DÚVIDA: Mesma dúvida do itens 11
 const inventarioPorDepartamento = ((lista) => {
     let departamentos = {}
     lista.map(produto => {
@@ -240,7 +243,7 @@ let invPorDepartamento = inventarioPorDepartamento(listaProdutos)
 
 // 13. Ticket médio por departamento (similar ao item anterior, porém retornando uma lista de objetos que contenha o nome do departamento e o seu ticket médio)
 const ticketMedioPorDepartamento = ((lista) => {
-    let departamentos = {}
+    let departamentos = []
     Object.keys(invPorDepartamento).map((dpto) => {
         let quant = 0
         lista.map(produto => {
@@ -248,7 +251,7 @@ const ticketMedioPorDepartamento = ((lista) => {
                 quant ++
             }
         })
-        departamentos = {... departamentos, [dpto]: (invPorDepartamento[dpto]/quant)}
+        departamentos = [... departamentos, {[dpto]: (invPorDepartamento[dpto]/quant)}]
     })
     console.log("13. Ticket médio por departamento: " + JSON.stringify(departamentos))
     return departamentos
