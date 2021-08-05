@@ -344,7 +344,7 @@ var listaProdutos = [
         "emDestaque": "sim",
         "departamento": {
             "idDepto": 3,
-            "nomeDepto": "Eletronicos"
+            "nomeDepto": "Acessorios"
         }
     },
     {
@@ -1093,48 +1093,38 @@ var listaProdutos = [
     }
 ]
 
-// 3. Quantidade total de itens disponíveis (similar ao anterior)
-const quantidadeDisponível = ((lista) => {
+// 1. Quantidade total de itens em estoque (somatória das quantidades de todos os produtos)
+const ex1 = ((lista) => {
     let total = 0
     lista.map(produto => {
-        if (produto.disponivel === "sim"){
-            total += produto.qtdEstoque
+        total += produto.qtdEstoque
+    })  
+    console.log(`1. Quantidade total de itens em estoque: ${total}`)
+})
+ex1(listaProdutos)
+
+// 8. Produto de estoque mais valioso (considere o preço multiplicado pela quantidade e também apenas EM ESTOQUE)
+function ex8(maisValioso) {
+    maisValioso = listaProdutos.map(produto => produto.preco * produto.qtdEstoque).reduce((a, b) => Math.max(a, b))
+    nomeMaisValioso = listaProdutos.map(produto => {
+        if (maisValioso == produto.preco * produto.qtdEstoque) {
+            nomeProdutoMaisValioso = produto.descricao
+            nomeDepartamento = produto.departamento.nomeDepto
         }
-    })
-    console.log(`3. Quantidade total de itens disponíveis: ${total}`)
-    return total;
-})
-quantidadeDisponível(listaProdutos)
+    }) 
+    console.log(`8. O produto ${nomeProdutoMaisValioso} é o item mais valioso do estoque. Todo o estoque custa R$ ${maisValioso} e pertence ao departamento de ${nomeDepartamento}`)
+}
+ex8()
 
-// 4. Quantidade de itens disponíveis e em destaque
-const quantidadeDisponívelEEmDestaque = ((lista) => {
-    let total = 0
-    lista.map(produto => {
-        if (produto.disponivel === "sim" && produto.emDestaque === "sim"){
-            total += produto.qtdEstoque
+// 9. Produto em estoque menos valioso (considere o preço multiplicado pela quantidade e também apenas EM ESTOQUE)
+function ex9(menosValioso) {
+    menosValioso = listaProdutos.map(produto => produto.preco * produto.qtdEstoque).reduce((a,b) => a*b ? Math.min(a,b) : (a ? a : b))
+    nomeMenosValioso = listaProdutos.map(produto => {
+        if (menosValioso == produto.preco * produto.qtdEstoque ) {
+            nomeProdutoMenosValioso = produto.descricao
+            nomeDepartamento = produto.departamento.nomeDepto
         }
-    })
-    console.log(`4. Quantidade de itens disponíveis e em destaque: ${total}`)
-    return total;
-})
-quantidadeDisponívelEEmDestaque(listaProdutos)
-
-// 5. Valor total do inventário da empresa (somatória dos valores individuais multiplicado pela quantidade em estoque - considere apenas os produtos “EM ESTOQUE”)
-const valorInventario = ((lista) => {
-    let total = 0
-    lista.map(produto => {
-        total += produto.qtdEstoque * produto.preco
-    })
-    console.log(`5. Valor total do inventário da empresa: ${total}`)
-    return total;
-})
-let totalValorInventario = valorInventario(listaProdutos)
-
-// 10. Valor do ticket médio dos produtos da empresa (basicamente o valor total do inventário dividido pelo número de itens - considere TODOS os produtos, porém considere apenas 1 exemplar por produto)
-const ticketMedio = ((lista) => {
-    let ticket = 0
-    ticket = totalValorInventario/lista.length
-    console.log(`10. Valor do ticket médio dos produtos da empresa: ${ticket}`)
-    return ticket;
-})
-ticketMedio(listaProdutos)
+    }) 
+    console.log(`9. O produto ${nomeProdutoMenosValioso} é o item menos valioso do estoque. Todo o estoque custa R$ ${menosValioso} e pertence ao departamento de ${nomeDepartamento}`)
+}
+ex9()
