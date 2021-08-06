@@ -1,5 +1,10 @@
-# Controle de Estoque - Grupo 4
- Desafio em Grupo 1 - Trilha Hacker XP #38
+# Controle de Estoque - Grupo 8
+Desafio em Grupo 1 - Trilha Hacker XP #38
+
+## Equipe:
+- Lucas Cordeiro
+- Matheus Gonzalez
+- Tamiris Camargo
 
 ## Descrição do Desafio
 
