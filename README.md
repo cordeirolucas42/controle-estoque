@@ -1,6 +1,10 @@
 # Controle de Estoque - Grupo 8
 Desafio em Grupo 1 - Trilha Hacker XP #38
 
+**Parte 1:** node desafio-pt1.js
+
+**Parte 2:** node desafio-pt2.js
+
 ## Equipe:
 - Lucas Cordeiro
 - Matheus Gonzalez
