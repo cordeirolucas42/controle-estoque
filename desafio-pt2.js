@@ -1131,6 +1131,7 @@ const valorTotalItensDepartamento2 = ((lista) => {
     console.log(`12. Valor total do inventário por departamento: ${JSON.stringify(deptos,null,"  ")}`)
     return deptos
 })
+// Essa variável que é o resultado da 12 será usada nas próximas questões
 let inventarioObj = valorTotalItensDepartamento2(listaProdutos)
 
 // 13. Ticket médio por departamento (similar ao item anterior, porém retornando uma lista de objetos que contenha o nome do departamento e o seu ticket médio)
