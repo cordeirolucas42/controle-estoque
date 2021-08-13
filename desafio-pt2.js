@@ -1094,32 +1094,44 @@ var listaProdutos = [
 ]
 
 // 11. Somatória de itens por departamento (você deverá retornar um objeto contendo o nome do departamento e o total de itens nele - Novamente considere os produtos “EM ESTOQUE” - e é apenas a somatória da quantidade de itens)
-const totalPorDepto = (lista) => {
-    // Array de objetos no formato {nomeDepto: "nome departamento", soma: 0} com um elemento para cada departamento
-    let deptos = [];
-    [... new Set(listaProdutos.map(prod => prod.departamento.nomeDepto))].forEach(depto => deptos.push({nomeDepto: depto, soma: 0}));
-    deptos = lista.reduce((acc,prod) => {
-        acc[acc.map(depto => depto.nomeDepto).indexOf(prod.departamento.nomeDepto)].soma += prod.qtdEstoque
-        return acc
-    },deptos)
-    console.log(`\n11. Somatória de itens por departamento: ${JSON.stringify(deptos, null, '  ')}`)
+const itensDepartamento = ((lista) => {
+    let dep = []
+    let total = [0,0,0,0,0,0,0,0,0]
+    lista.map(produto => {
+        total[produto.departamento.idDepto - 1] += produto.qtdEstoque
+        dep[produto.departamento.idDepto - 1] = produto.departamento.nomeDepto        
+    })
+    let deptos = []
+    for (var i = 0; i < total.length; i++){
+        deptos.push({
+            nomeDepto: dep[i],
+            soma: total[i]
+        })
+    }
+    console.log(`11. Somatória de itens por departamento: ${JSON.stringify(deptos,null,"  ")}`)
     return deptos
-}
-totalPorDepto(listaProdutos)
+})
+itensDepartamento(listaProdutos)
 
 // 12. Valor total do inventário por departamento (similar ao item anterior - considere TODOS os produtos)
-const inventarioPorDepto = (lista) => {
-    // Array de objetos do formato {nomeDepto: "nome departamento", soma: 0}
-    let deptos = [];
-    [... new Set(listaProdutos.map(prod => prod.departamento.nomeDepto))].forEach(depto => deptos.push({nomeDepto: depto, soma: 0}));
-    deptos = lista.reduce((acc,prod) => {
-        acc[acc.map(depto => depto.nomeDepto).indexOf(prod.departamento.nomeDepto)].soma += prod.qtdEstoque * prod.preco
-        return acc
-    },deptos)
-    console.log(`\n12. Valor total do inventário por departamento: ${JSON.stringify(deptos, null, '  ')}`)
+const valorTotalItensDepartamento2 = ((lista) => {
+    let dep = []
+    let total = [0,0,0,0,0,0,0,0,0]
+    lista.map(produto => {
+        total[produto.departamento.idDepto - 1] += produto.qtdEstoque * produto.preco
+        dep[produto.departamento.idDepto - 1] = produto.departamento.nomeDepto        
+    })
+    let deptos = []
+    for (var i = 0; i < total.length; i++){
+        deptos.push({
+            nomeDepto: dep[i],
+            soma: total[i]
+        })
+    }
+    console.log(`12. Valor total do inventário por departamento: ${JSON.stringify(deptos,null,"  ")}`)
     return deptos
-}
-let inventarioObj = inventarioPorDepto(listaProdutos)
+})
+let inventarioObj = valorTotalItensDepartamento2(listaProdutos)
 
 // 13. Ticket médio por departamento (similar ao item anterior, porém retornando uma lista de objetos que contenha o nome do departamento e o seu ticket médio)
 const ticketPorDepto = (lista) => {
